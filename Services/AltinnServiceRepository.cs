@@ -157,7 +157,7 @@ namespace Altinn.Service
             JsonSerializer serializer = new JsonSerializer();
             JsonValue json = serializer.Serialize(jsonSchema);
 
-            byte[] bytes = Encoding.Unicode.GetBytes(json.GetIndentedString());
+            byte[] bytes = Encoding.UTF8.GetBytes(json.GetIndentedString());
             using (MemoryStream msi = new MemoryStream(bytes))
             using (MemoryStream mso = new MemoryStream())
             {
