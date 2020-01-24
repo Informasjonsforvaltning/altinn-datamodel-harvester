@@ -16,7 +16,6 @@ namespace fdkalt
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
-            AppContext.SetSwitch("System.Net.Http.UseSocketsHttpHandler", false);
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
