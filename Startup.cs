@@ -46,11 +46,6 @@ namespace fdkalt
                 logger.LogInformation($"Environment: {_env.EnvironmentName}");
             }
             services.AddMvc();
-            services.AddHttpClient().ConfigurePrimaryHttpMessageHandler(x =>
-                        {
-                            var handler = new HttpClientHandler {SslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12};
-                            return handler;
-                        });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
