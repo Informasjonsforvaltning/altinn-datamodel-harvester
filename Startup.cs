@@ -65,7 +65,6 @@ namespace fdkalt
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

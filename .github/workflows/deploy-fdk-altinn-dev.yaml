@@ -11,13 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Create json file from secret
-        id: write_file
-        uses: timheuer/base64-to-file@v1
-        with:
-          fileName: 'client-secret.json'
-          encodedString: ${{ secrets.GCP_SA_KEY }}
-
       - name: Initialize Google Cloud SDK
         uses: zxyle/publish-gae-action@master
         with:
@@ -28,6 +21,6 @@ jobs:
       - name: Publish app to Google App Engine
         run: |
           # This client-secret.json is converted by GCP_SA_KEY.
-          gcloud auth activate-service-account ${{ secrets.GCP_SA_EMAIL }} --key-file=${{ steps.write_file.outputs.filePath }}
+          gcloud auth activate-service-account ${{ secrets.GCP_SA_EMAIL }} --key-file=client-secret.json
           gcloud config set project fdk-dev-altinn
           gcloud -q app deploy app.yaml --promote
