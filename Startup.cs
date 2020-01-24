@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,6 +46,11 @@ namespace fdkalt
                 logger.LogInformation($"Environment: {_env.EnvironmentName}");
             }
             services.AddMvc();
+            services.AddHttpClient().ConfigurePrimaryHttpMessageHandler(x =>
+                        {
+                            var handler = new HttpClientHandler {SslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12};
+                            return handler;
+                        });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +65,7 @@ namespace fdkalt
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
